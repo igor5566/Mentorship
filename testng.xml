@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="tests">
+
+    <listeners>
+        <listener class-name="core.utils.TestListener"/>
+    </listeners>
+
+    <test name="First">
+        <classes>
+            <class name="com.github.tests.UItests.UITests">
+                <methods>
+                    <include name="loginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
