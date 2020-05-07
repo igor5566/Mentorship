@@ -18,7 +18,7 @@ public class BasePage {
     }
 
     public void click(WebElement element) {
-        new WebDriverWait(driver, 15).until(elementToBeClickable(element)).click();
+        new WebDriverWait(driver, 10).until(elementToBeClickable(element)).click();
     }
 
     public String getUrl() {
@@ -26,7 +26,7 @@ public class BasePage {
     }
 
     public void type(WebElement element, String content) {
-        new WebDriverWait(driver, 15).until(visibilityOf(element)).clear();
+        element.clear();
         element.sendKeys(content);
     }
 

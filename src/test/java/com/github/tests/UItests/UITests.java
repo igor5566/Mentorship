@@ -12,6 +12,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -26,6 +28,7 @@ public class UITests extends BaseTest {
     @BeforeTest
     public void setUp(ITestContext context) {
         driver = getDriver();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         context.setAttribute("webDriver", driver);
     }
 
