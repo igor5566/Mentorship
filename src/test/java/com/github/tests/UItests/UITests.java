@@ -21,16 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UITests extends BaseTest {
 
     private final String url = "http://github.com/login";
-    private WebDriver driver;
     private LoginPage loginPage;
     private MainPage mainPage;
-
-    @BeforeTest
-    public void setUp(ITestContext context) {
-        driver = getDriver();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        context.setAttribute("webDriver", driver);
-    }
 
     @Test(description = "Verify Home page is opened.")
     public void loginTest() {
