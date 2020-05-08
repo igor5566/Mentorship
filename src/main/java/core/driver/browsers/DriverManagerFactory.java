@@ -1,6 +1,5 @@
 package core.driver.browsers;
 
-import core.driver.browsers.DriverManager;
 import core.utils.MavenUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -8,11 +7,17 @@ public class DriverManagerFactory extends DriverManager {
 
     public void getDriverType(String browser) {
         switch (browser) {
-            case "firefox":
-                this.driver = createFirefoxDriver();
+            case "firefox-win":
+                this.driver = createFirefoxDriverWin();
+                break;
+            case "firefox-linux":
+                this.driver = createFirefoxDriverLinux();
+                break;
+            case "chrome-linux":
+                this.driver = createChromeDriverLinux();
                 break;
             default:
-                this.driver = createChromeDriver();
+                this.driver = createChromeDriverWin();
                 break;
         }
     }
