@@ -19,7 +19,7 @@ public class MainPage extends BasePage {
 
     public boolean isDashboardVisible() {
         try {
-            isElementVisible(pullRequestBtn, 20);
+            isElementVisible(pullRequestBtn, 10);
             return true;
         } catch (Exception ex) {
             return false;
