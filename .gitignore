@@ -3,7 +3,7 @@
 
 # Log file
 logdebug
-allure-results
+allure-results/
 screenshots
 target/
 test-output/
