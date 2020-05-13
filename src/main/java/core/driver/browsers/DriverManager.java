@@ -23,7 +23,7 @@ public abstract class DriverManager {
             pathToDriver = "src/main/resources/webdrivers/linux/";
         } else if (systemName.startsWith("macos")) {
             pathToDriver = "src/main/resources/webdrivers/mac/";
-        } else if(pathToDriver.equals("")) {
+        } else {
             log.error("Unable to detect OS name.");
         }
         return pathToDriver;
