@@ -2,35 +2,47 @@ package com.github.base;
 
 import core.driver.browsers.DriverManagerFactory;
 import core.utils.TestListener;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static core.utils.MavenUtils.*;
+
+@Slf4j
 @Listeners(TestListener.class)
 public class BaseTest {
 
     private DriverManagerFactory driverManagerFactory;
+    protected String uniqueID ;
     protected WebDriver driver;
 
     @BeforeSuite
     public void setUp(ITestContext context) {
         driverManagerFactory = new DriverManagerFactory();
         driver = driverManagerFactory.getWebDriver();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(timeWait, TimeUnit.SECONDS);
         context.setAttribute("webDriver", driver);
+        setUniqueID();
     }
 
     public void open(String url) {
         driver.get(url);
     }
 
+    private void setUniqueID() {
+        uniqueID = new Date().getTime() + "";
+    }
+
     @AfterSuite
     public void threadDown() {
-        driver.quit();
+        if(null != driver) {
+            driver.quit();
+        }
     }
 }

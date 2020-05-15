@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static core.utils.MavenUtils.*;
+
 public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='login']")
@@ -23,9 +25,9 @@ public class LoginPage extends BasePage {
 
     @Step("Login into account.")
     public MainPage logIn(String email, String password) {
-        waitUntilPageIsReady(4000);
+        waitUntilPageIsReady(timesWait);
         type(loginField, email);
-        waitUntilPageIsReady(4000);
+        waitUntilPageIsReady(timesWait);
         type(passwordField, password);
         click(singInBtn);
         return new MainPage(driver);

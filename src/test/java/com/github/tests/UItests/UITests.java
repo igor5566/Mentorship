@@ -1,27 +1,56 @@
 package com.github.tests.UItests;
 
 import com.github.base.BaseTest;
-import com.github.pages.LoginPage;
-import com.github.pages.MainPage;
-import core.utils.MavenUtils;
+import com.github.pages.*;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import static core.utils.MavenUtils.*;
 import static org.assertj.core.api.Assertions.*;
 
 @Slf4j
 public class UITests extends BaseTest {
 
     private final String url = "http://github.com/login";
+    private String repoName = "Test";
     private LoginPage loginPage;
     private MainPage mainPage;
+    private CreateRepoPage createRepoPage;
+    private NewRepoPage newRepoPage;
+    private RepoPage repoPage;
+    private SettingsPage settingsPage;
+
+    @AfterMethod
+    public void clearDriver() {
+        driver.manage().deleteAllCookies();
+    }
 
     @Test(description = "Verify Home page is opened.")
     public void loginTest() {
         open(url);
         loginPage = new LoginPage(driver);
-        mainPage = loginPage.logIn(MavenUtils.getEmail(), MavenUtils.getPass());
-        log.info("Some info from logger.");
+        mainPage = loginPage.logIn(email, pass);
         assertThat(mainPage.isDashboardVisible()).as("Cannot login into the account.").isTrue();
+    }
+
+    @Test(description = "Verify creating new repository.", priority = 1)
+    public void creatingRepoTest() {
+        open(url);
+        loginPage = new LoginPage(driver);
+        mainPage = loginPage.logIn(email, pass);
+        createRepoPage = mainPage.getCreateRepoPage();
+        newRepoPage = createRepoPage.createRepo(repoName + uniqueID);
+        assertThat(newRepoPage.checkRepoName(repoName + uniqueID)).as("Repo name isn't the same").isTrue();
+    }
+
+    @Test(description = "Delete repository.", priority = 2)
+    public void deleteRepoTest() {
+        open(url);
+        loginPage = new LoginPage(driver);
+        mainPage = loginPage.logIn(email, pass);
+        repoPage = mainPage.getRepoPage(uniqueID);
+        settingsPage = repoPage.getSettingsPage();
+        settingsPage.deleteRepo(userID + "/" + repoName + uniqueID);
     }
 }

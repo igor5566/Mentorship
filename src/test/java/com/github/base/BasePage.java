@@ -1,13 +1,17 @@
 package com.github.base;
 
+import static core.utils.MavenUtils.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
-
+@Slf4j
 public class BasePage {
 
     protected WebDriver driver;
@@ -18,11 +22,7 @@ public class BasePage {
     }
 
     public void click(WebElement element) {
-        new WebDriverWait(driver, 10).until(elementToBeClickable(element)).click();
-    }
-
-    public String getUrl() {
-        return driver.getCurrentUrl();
+        new WebDriverWait(driver, timeWait).until(elementToBeClickable(element)).click();
     }
 
     public void type(WebElement element, String content) {
@@ -44,4 +44,16 @@ public class BasePage {
         new WebDriverWait(driver, time).until(visibilityOf(element));
     }
 
+    public void scrollPageDown() {
+        try {
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        } catch (Exception ex) {
+            log.info(ex.getMessage());
+        }
+    }
+
+    public void waitUntilElementHasText(WebElement element, String text) {
+        waitUntilPageIsReady(timesWait);
+        new WebDriverWait(driver, timeWait).until(textToBePresentInElement(element, text));
+    }
 }

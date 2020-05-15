@@ -10,6 +10,9 @@
             <class name="com.github.tests.UItests.UITests">
                 <methods>
                     <include name="loginTest"/>
+                    <include name="creatingRepoTest"/>
+                    <include name="clearDriver"/>
+                    <include name="deleteRepoTest"/>
                 </methods>
             </class>
         </classes>

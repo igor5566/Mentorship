@@ -10,14 +10,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public abstract class DriverManager {
 
     protected WebDriver driver;
-    private String file = "";
+    private String fileType = "";
 
     private String getPathToDriver() {
         String pathToDriver = "";
         String name = "os.name";
         String systemName = System.getProperty(name).toLowerCase();
         if (systemName.startsWith("windows")) {
-            file = ".exe";
+            fileType = ".exe";
             pathToDriver = "src/main/resources/webdrivers/win/";
         } else if (systemName.startsWith("linux")) {
             pathToDriver = "src/main/resources/webdrivers/linux/";
@@ -30,7 +30,7 @@ public abstract class DriverManager {
     }
 
     protected WebDriver createFirefoxDriver() {
-        String path = getPathToDriver() + "geckodriver" + file;
+        String path = getPathToDriver() + "geckodriver" + fileType;
         System.setProperty("webdriver.gecko.driver", path);
         return new FirefoxDriver();
     }
@@ -38,7 +38,7 @@ public abstract class DriverManager {
     protected WebDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications", "--start-maximized");
-        String path = getPathToDriver() + "chromedriver" + file;
+        String path = getPathToDriver() + "chromedriver" + fileType;
         System.setProperty("webdriver.chrome.driver", path);
         return new ChromeDriver(options);
     }

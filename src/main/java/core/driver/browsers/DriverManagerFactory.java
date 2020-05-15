@@ -1,7 +1,7 @@
 package core.driver.browsers;
 
-import core.utils.MavenUtils;
 import org.openqa.selenium.WebDriver;
+import static core.utils.MavenUtils.*;
 
 public class DriverManagerFactory extends DriverManager {
 
@@ -17,7 +17,7 @@ public class DriverManagerFactory extends DriverManager {
     }
 
     public WebDriver getWebDriver() {
-        getDriverType(MavenUtils.getDriverName());
+        getDriverType(driverName);
         return this.driver;
     }
 }
