@@ -19,6 +19,10 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[@id='dashboard-repos-container']/div//input")
     private WebElement findRepoField;
 
+    private By repoListItemName = By.xpath("//div[@id='dashboard-repos-container']//ul/li//span[2]");
+
+    private String dashBoardReposContainerXpath = "//div[@id='dashboard-repos-container']";
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -41,9 +45,17 @@ public class MainPage extends BasePage {
 
     public RepoPage getRepoPage(String name) {
         type(findRepoField, name);
-        WebElement element = driver.findElement(By.xpath(String.format("//div[@id='dashboard-repos-container']//*[contains(text(),'%s')]", name)));
-        click(element);
+        click(findElementByText(dashBoardReposContainerXpath, name));
         return new RepoPage(driver);
     }
 
+    public boolean isRepoURLDisappear(String name) {
+        type(findRepoField, name);
+        try {
+            isElementInvisible(repoListItemName, name, timeWait);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 }

@@ -21,10 +21,6 @@ public class UITests extends BaseTest {
     private RepoPage repoPage;
     private SettingsPage settingsPage;
 
-    @AfterMethod
-    public void clearDriver() {
-        driver.manage().deleteAllCookies();
-    }
 
     @Test(description = "Verify Home page is opened.")
     public void loginTest() {
@@ -36,9 +32,6 @@ public class UITests extends BaseTest {
 
     @Test(description = "Verify creating new repository.", priority = 1)
     public void creatingRepoTest() {
-        open(url);
-        loginPage = new LoginPage(driver);
-        mainPage = loginPage.logIn(email, pass);
         createRepoPage = mainPage.getCreateRepoPage();
         newRepoPage = createRepoPage.createRepo(repoName + uniqueID);
         assertThat(newRepoPage.checkRepoName(repoName + uniqueID)).as("Repo name isn't the same").isTrue();
@@ -47,10 +40,9 @@ public class UITests extends BaseTest {
     @Test(description = "Delete repository.", priority = 2)
     public void deleteRepoTest() {
         open(url);
-        loginPage = new LoginPage(driver);
-        mainPage = loginPage.logIn(email, pass);
         repoPage = mainPage.getRepoPage(uniqueID);
         settingsPage = repoPage.getSettingsPage();
         settingsPage.deleteRepo(userID + "/" + repoName + uniqueID);
+        assertThat(mainPage.isRepoURLDisappear(uniqueID)).as("Repo is still in the list.").isTrue();
     }
 }

@@ -4,6 +4,7 @@ import static core.utils.MavenUtils.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,6 +45,10 @@ public class BasePage {
         new WebDriverWait(driver, time).until(visibilityOf(element));
     }
 
+    public void isElementInvisible(By xpath, String text,  int time) {
+        new WebDriverWait(driver, time).until(invisibilityOfElementWithText(xpath, text));
+    }
+
     public void scrollPageDown() {
         try {
             ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -52,8 +57,8 @@ public class BasePage {
         }
     }
 
-    public void waitUntilElementHasText(WebElement element, String text) {
-        waitUntilPageIsReady(timesWait);
-        new WebDriverWait(driver, timeWait).until(textToBePresentInElement(element, text));
+    public WebElement findElementByText(String xpath, String text) {
+        String finalXpath = xpath + (String.format("//*[contains(text(),'%s')]", text));
+        return driver.findElement(By.xpath(finalXpath));
     }
 }
