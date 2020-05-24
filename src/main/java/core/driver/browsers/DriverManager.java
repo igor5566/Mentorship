@@ -38,6 +38,9 @@ public abstract class DriverManager {
     protected WebDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications", "--start-maximized");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
         String path = getPathToDriver() + "chromedriver" + fileType;
         System.setProperty("webdriver.chrome.driver", path);
         return new ChromeDriver(options);
