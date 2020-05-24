@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 public class UITests extends BaseTest {
 
     private final String url = "http://github.com/login";
-    private String repoName = "Test";
+    private String repoName = "Jenkins";
     private LoginPage loginPage;
     private MainPage mainPage;
     private CreateRepoPage createRepoPage;
@@ -37,12 +37,12 @@ public class UITests extends BaseTest {
         assertThat(newRepoPage.checkRepoName(repoName + uniqueID)).as("Repo name isn't the same").isTrue();
     }
 
-    @Test(description = "Delete repository.", priority = 2)
-    public void deleteRepoTest() {
-        open(url);
-        repoPage = mainPage.getRepoPage(uniqueID);
-        settingsPage = repoPage.getSettingsPage();
-        settingsPage.deleteRepo(userID + "/" + repoName + uniqueID);
-        assertThat(mainPage.isRepoURLDisappear(uniqueID)).as("Repo is still in the list.").isTrue();
-    }
+//     @Test(description = "Delete repository.", priority = 2)
+//     public void deleteRepoTest() {
+//         open(url);
+//         repoPage = mainPage.getRepoPage(uniqueID);
+//         settingsPage = repoPage.getSettingsPage();
+//         settingsPage.deleteRepo(userID + "/" + repoName + uniqueID);
+//         assertThat(mainPage.isRepoURLDisappear(uniqueID)).as("Repo is still in the list.").isTrue();
+//     }
 }
