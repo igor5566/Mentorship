@@ -38,9 +38,9 @@ public abstract class DriverManager {
     protected WebDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications", "--start-maximized");
-        options.addArguments("--headless"); //!!!should be enabled for Jenkins
-        options.addArguments("--disable-dev-shm-usage"); //!!!should be enabled for Jenkins
-        options.addArguments("--window-size=1920x1080");
+//        options.addArguments("--headless"); //!!!should be enabled for Jenkins
+//        options.addArguments("--disable-dev-shm-usage"); //!!!should be enabled for Jenkins
+//        options.addArguments("--window-size=1920x1080");// !!!should be enabled for Jenkins
         String path = getPathToDriver() + "chromedriver" + fileType;
         System.setProperty("webdriver.chrome.driver", path);
         return new ChromeDriver(options);
