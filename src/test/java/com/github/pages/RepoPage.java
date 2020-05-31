@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static core.utils.MavenUtils.*;
+import static core.ConfigManager.*;
 
 public class RepoPage extends BasePage {
 
@@ -16,7 +16,7 @@ public class RepoPage extends BasePage {
         super(driver);
     }
 
-    public SettingsPage getSettingsPage() {
+    public SettingsPage clickOnSettingsBtn() {
         waitUntilPageIsReady(timesWait);
         click(settingsBtn);
         return new SettingsPage(driver);

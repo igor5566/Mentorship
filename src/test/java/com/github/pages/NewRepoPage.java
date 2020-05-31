@@ -14,7 +14,7 @@ public class NewRepoPage extends BasePage {
         super(driver);
     }
 
-    public boolean checkRepoName(String name) {
+    public boolean checkCreatedRepoName(String name) {
         String actualName = repoName.getText();
         return actualName.equals(name);
     }

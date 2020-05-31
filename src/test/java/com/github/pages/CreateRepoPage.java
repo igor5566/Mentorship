@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static core.utils.MavenUtils.*;
+import static core.ConfigManager.*;
 
 public class CreateRepoPage extends BasePage {
 
@@ -19,7 +19,7 @@ public class CreateRepoPage extends BasePage {
         super(driver);
     }
 
-    public NewRepoPage createRepo(String name) {
+    public NewRepoPage createNewRepoByUI(String name) {
         type(repoNameField, name);
         waitUntilPageIsReady(timesWait);
         scrollPageDown();

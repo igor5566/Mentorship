@@ -67,5 +67,9 @@ public class TestListener extends TestListenerAdapter {
 
     @Override
     public void onFinish(ITestContext context) {
+        WebDriver driver = (WebDriver)context.getAttribute("webDriver");
+        if(null != driver) {
+            driver.quit();
+        }
     }
 }

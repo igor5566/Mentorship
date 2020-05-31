@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static core.utils.MavenUtils.*;
+import static core.ConfigManager.*;
 
 public class MainPage extends BasePage {
 
@@ -36,14 +36,14 @@ public class MainPage extends BasePage {
         }
     }
 
-    public CreateRepoPage getCreateRepoPage() {
+    public CreateRepoPage clickCreateNewRepoBtn() {
         waitUntilPageIsReady(timesWait);
         click(createNewRepoBtn);
         waitUntilPageIsReady(timesWait);
         return new CreateRepoPage(driver);
     }
 
-    public RepoPage getRepoPage(String name) {
+    public RepoPage typeAndClickRepoByName(String name) {
         type(findRepoField, name);
         click(findElementByText(dashBoardReposContainerXpath, name));
         return new RepoPage(driver);

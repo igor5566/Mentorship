@@ -12,7 +12,7 @@ import org.testng.annotations.Listeners;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static core.utils.MavenUtils.*;
+import static core.ConfigManager.*;
 
 @Slf4j
 @Listeners(TestListener.class)

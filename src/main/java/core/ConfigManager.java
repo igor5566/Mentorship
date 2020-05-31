@@ -1,4 +1,4 @@
-package core.utils;
+package core;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Slf4j
-public class MavenUtils {
+public class ConfigManager {
 
     public static String email;
     public static String pass;
@@ -95,7 +95,7 @@ public class MavenUtils {
         Properties properties = new Properties();
         String file;
         try {
-            file = Objects.requireNonNull(MavenUtils.class.getClassLoader().getResource(envName)).getFile();
+            file = Objects.requireNonNull(ConfigManager.class.getClassLoader().getResource(envName)).getFile();
             properties.load(new FileInputStream(new File(file)));
         } catch (NullPointerException ex) {
             log.error(ex.getMessage());

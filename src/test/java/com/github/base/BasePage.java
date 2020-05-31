@@ -1,6 +1,6 @@
 package com.github.base;
 
-import static core.utils.MavenUtils.*;
+import static core.ConfigManager.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Slf4j

@@ -20,7 +20,7 @@ public class SettingsPage extends BasePage {
         super(driver);
     }
 
-    public void deleteRepo(String name) {
+    public void deleteRepoByUI(String name) {
         scrollPageDown();
         click(deleteBtn);
         type(deleteConfirmField, name);
