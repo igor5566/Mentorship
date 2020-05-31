@@ -17,7 +17,7 @@ public class APITest {
 
     private String date;
     private String uniqueID;
-    private String token = "Bearer 605fe9db8ae0aba46c88e9414bd17a7f9a76fab8";
+    private String token = "Basic aXZvbGtvZmY1NTY2OjIwMjBTT0ZUc2VydmUvb25l";
     private String email = "volkoff5566@gmail.com";
     private final String baseURI = "https://api.github.com";
     private RequestSpecification requestSpec;
