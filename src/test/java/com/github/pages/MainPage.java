@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static core.ConfigManager.*;
+import static github.core.ConfigManager.*;
 
 public class MainPage extends BasePage {
 

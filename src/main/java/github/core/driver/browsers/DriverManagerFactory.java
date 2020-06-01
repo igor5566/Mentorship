@@ -1,7 +1,7 @@
-package core.driver.browsers;
+package github.core.driver.browsers;
 
 import org.openqa.selenium.WebDriver;
-import static core.ConfigManager.*;
+import static github.core.ConfigManager.*;
 
 public class DriverManagerFactory extends DriverManager {
 

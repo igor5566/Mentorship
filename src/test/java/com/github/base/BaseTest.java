@@ -1,7 +1,7 @@
 package com.github.base;
 
-import core.driver.browsers.DriverManagerFactory;
-import core.utils.TestListener;
+import github.core.driver.browsers.DriverManagerFactory;
+import github.core.utils.TestListener;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
@@ -12,7 +12,7 @@ import org.testng.annotations.Listeners;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static core.ConfigManager.*;
+import static github.core.ConfigManager.*;
 
 @Slf4j
 @Listeners(TestListener.class)

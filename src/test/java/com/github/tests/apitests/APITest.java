@@ -1,5 +1,9 @@
-package com.github.tests.APItests;
+package com.github.tests.apitests;
 
+import github.core.api.EndPoints;
+import github.core.api.requests.RepoRequests;
+import github.core.api.requests.UserRequest;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,17 +15,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class APITest {
 
     private String date;
     private String uniqueID;
+    private String login = "ivolkoff5566";
     private String token = "Basic aXZvbGtvZmY1NTY2OjIwMjBTT0ZUc2VydmUvb25l";
-    private String email = "volkoff5566@gmail.com";
-    private final String baseURI = "https://api.github.com";
-    private RequestSpecification requestSpec;
-
+    private UserRequest userRequest;
+    private RepoRequests repoRequests;
 
     @BeforeClass
     public void settingUp() {
@@ -30,19 +34,13 @@ public class APITest {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = dateFormat.format(dateLong);
         uniqueID = d.getTime() + "";
-
-        requestSpec = given()
-                .baseUri(baseURI)
-                .header("Authorization", token);
     }
 
     @Test(description = "Verify user's login is as expected.")
     public void userLoginVerify() {
-        requestSpec.when()
-                .get("/user")
-                .then()
-                .statusCode(200)
-                .body("login", equalTo("ivolkoff5566"));
+        userRequest = new UserRequest();
+        Response response = userRequest.userLoginVerifyRequest(token, 200, EndPoints.USER_INFO);
+        response.then().body("login", equalTo(login));
     }
 
     @Test(description = "Creating new repo using API.")
@@ -53,11 +51,15 @@ public class APITest {
         repoInfo.put("private", false);
         repoInfo.put("gitignore_template", "nanoc");
 
-        requestSpec.contentType("application/json")
-                .body(repoInfo)
-                .post("/user/repos")
-                .then()
-                .statusCode(201)
-                .body("name", equalTo("APITest" + uniqueID));
+        repoRequests = new RepoRequests();
+        Response response = repoRequests.createRepoVerifyRequest(token, 201, EndPoints.USERS_REPOS, repoInfo);
+        response.then().body("name", equalTo("APITest" + uniqueID));
+
+//        requestSpec.contentType("application/json")
+//                .body(repoInfo)
+//                .post("/user/repos")
+//                .then()
+//                .statusCode(201)
+//                .body("name", equalTo("APITest" + uniqueID));
     }
 }

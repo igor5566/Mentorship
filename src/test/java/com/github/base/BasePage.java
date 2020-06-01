@@ -1,6 +1,6 @@
 package com.github.base;
 
-import static core.ConfigManager.*;
+import static github.core.ConfigManager.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import lombok.extern.slf4j.Slf4j;

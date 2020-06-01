@@ -1,11 +1,11 @@
-package com.github.tests.UItests;
+package com.github.tests.uitests;
 
 import com.github.base.BaseTest;
 import com.github.pages.*;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
 
-import static core.ConfigManager.*;
+import static github.core.ConfigManager.*;
 import static org.assertj.core.api.Assertions.*;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package core;
+package github.core;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -80,7 +80,7 @@ public class ConfigManager {
     }
 
 
-    private static String getParameter(String propName, String envName) {
+    public static String getParameter(String propName, String envName) {
         String system;
             system = getProperties(envName).getProperty(propName);
             try {
@@ -101,7 +101,7 @@ public class ConfigManager {
             log.error(ex.getMessage());
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new RuntimeException("Cannot find properties file: env.properties", e);
+            throw new RuntimeException("Cannot find properties file ", e);
         }
         return properties;
     }

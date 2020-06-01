@@ -1,4 +1,4 @@
-package core.utils;
+package github.core.utils;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;

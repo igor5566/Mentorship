@@ -2,12 +2,12 @@
 <suite name="tests">
 
 <!--    <listeners>-->
-<!--        <listener class-name="core.utils.TestListener"/>-->
+<!--        <listener class-name="TestListener"/>-->
 <!--    </listeners>-->
 
     <test name="First">
         <classes>
-            <class name="com.github.tests.UItests.UITests">
+            <class name="com.github.tests.uitests.UITests">
                 <methods>
                     <include name="loginTest"/>
                     <include name="creatingRepoTest"/>
@@ -15,7 +15,7 @@
                     <include name="deleteRepoTest"/>
                 </methods>
             </class>
-            <class name="com.github.tests.APItests.APITest"/>
+            <class name="com.github.tests.apitests.APITest"/>
         </classes>
     </test>
 </suite>
