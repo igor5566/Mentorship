@@ -1,10 +1,10 @@
 package com.github.tests.apitests;
 
-import github.core.api.EndPoints;
 import github.core.api.requests.RepoRequests;
 import github.core.api.requests.UserRequest;
+import github.core.tools.JsonTools;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -14,10 +14,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.given;
-import static org.assertj.core.api.Assertions.assertThat;
+import static github.core.api.EndPoints.USERS_REPOS;
+import static github.core.api.EndPoints.USER_INFO;
 import static org.hamcrest.Matchers.equalTo;
 
+@Slf4j
 public class APITest {
 
     private String date;
@@ -26,6 +27,7 @@ public class APITest {
     private String token = "Basic aXZvbGtvZmY1NTY2OjIwMjBTT0ZUc2VydmUvb25l";
     private UserRequest userRequest;
     private RepoRequests repoRequests;
+    private JsonTools jsonTools;
 
     @BeforeClass
     public void settingUp() {
@@ -39,7 +41,7 @@ public class APITest {
     @Test(description = "Verify user's login is as expected.")
     public void userLoginVerify() {
         userRequest = new UserRequest();
-        Response response = userRequest.userLoginVerifyRequest(token, 200, EndPoints.USER_INFO);
+        Response response = userRequest.userLoginVerifyRequest(token, 200, USER_INFO);
         response.then().body("login", equalTo(login));
     }
 
@@ -52,14 +54,8 @@ public class APITest {
         repoInfo.put("gitignore_template", "nanoc");
 
         repoRequests = new RepoRequests();
-        Response response = repoRequests.createRepoVerifyRequest(token, 201, EndPoints.USERS_REPOS, repoInfo);
-        response.then().body("name", equalTo("APITest" + uniqueID));
 
-//        requestSpec.contentType("application/json")
-//                .body(repoInfo)
-//                .post("/user/repos")
-//                .then()
-//                .statusCode(201)
-//                .body("name", equalTo("APITest" + uniqueID));
+        Response response = repoRequests.createRepoVerifyRequest(token, 201, USERS_REPOS, repoInfo);
+        response.then().body("name", equalTo("APITest" + uniqueID));
     }
 }

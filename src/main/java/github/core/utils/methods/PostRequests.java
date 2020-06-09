@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class PostRequests {
 
     private ApiWaiter apiWaiter = new ApiWaiter();
 
-    public Response withTokenAndBody(String token, int responseCode, String resources, Map<?, ?> map) {
+    public Response withTokenAndBody(String token, int responseCode, String resources, Map<String, Object> map) {
         ValidateResponseWaiter responseWaiter = () -> {
             RestAssured.baseURI = EndPoints.BASE_URI;
             return given()
@@ -38,5 +39,4 @@ public class PostRequests {
 
         return resp;
     }
-
 }

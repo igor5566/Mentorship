@@ -37,10 +37,16 @@
             <version>2.13.2</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.googlecode.json-simple</groupId>-->
+<!--            <artifactId>json-simple</artifactId>-->
+<!--            <version>1.1.1</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
         </dependency>
 
         <dependency>
@@ -96,18 +102,12 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4j-core.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.9.10</version>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-            <version>3.0.0</version>
-            <scope>test</scope>
         </dependency>
 
 
@@ -155,42 +155,6 @@
 
     <build>
         <pluginManagement>
-            <!--            <plugins>-->
-            <!--                <plugin>-->
-            <!--                    <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                    <artifactId>maven-surefire-plugin</artifactId>-->
-            <!--                    <version>3.0.0-M4</version>-->
-            <!--                    <configuration>-->
-            <!--                        <suiteXmlFiles>-->
-            <!--                            <suiteXmlFile>testng.xml</suiteXmlFile>-->
-            <!--                        </suiteXmlFiles>-->
-            <!--                        <systemProperties>-->
-            <!--                            <property>-->
-            <!--                                <name>email</name>-->
-            <!--                                <value></value>-->
-            <!--                            </property>-->
-            <!--                            <property>-->
-            <!--                                <name>pass</name>-->
-            <!--                                <value></value>-->
-            <!--                            </property>-->
-            <!--                            <property>-->
-            <!--                                <name>driver</name>-->
-            <!--                                <value></value>-->
-            <!--                            </property>-->
-            <!--                        </systemProperties>-->
-            <!--                        <argLine>-->
-            <!--                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"-->
-            <!--                        </argLine>-->
-            <!--                    </configuration>-->
-            <!--                    <dependencies>-->
-            <!--                        <dependency>-->
-            <!--                            <groupId>org.aspectj</groupId>-->
-            <!--                            <artifactId>aspectjweaver</artifactId>-->
-            <!--                            <version>1.9.5</version>-->
-            <!--                        </dependency>-->
-            <!--                    </dependencies>-->
-            <!--                </plugin>-->
-            <!--            </plugins>-->
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
