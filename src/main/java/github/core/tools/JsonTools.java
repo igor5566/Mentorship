@@ -16,8 +16,8 @@ import java.util.Map;
 @Slf4j
 public class JsonTools {
 
-    public Map<Object,Object> getMapFromJSONFile(String filePath,  Gson gson) {
-        Map<Object,Object> map = new HashMap<>();
+    public Map<Object, Object> getMapFromJSONFile(String filePath, Gson gson) {
+        Map<Object, Object> map = new HashMap<>();
         try {
             Reader reader = Files.newBufferedReader(Paths.get(filePath));
             map = gson.fromJson(reader, Map.class);
@@ -62,8 +62,7 @@ public class JsonTools {
 
             if (jsonObject.optJSONArray(key)
                     != null) {
-                JSONArray jsonArray = jsonObject.getJSONArray(key)
-                        ;
+                JSONArray jsonArray = jsonObject.getJSONArray(key);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.get(i) instanceof JSONObject) {
                         removeJsonAttr(jsonArray.getJSONObject(i), concurrentKey, concurrentValue);
@@ -95,8 +94,7 @@ public class JsonTools {
 
             if (jsonObject.optJSONArray(key)
                     != null) {
-                JSONArray jsonArray = jsonObject.getJSONArray(key)
-                        ;
+                JSONArray jsonArray = jsonObject.getJSONArray(key);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.get(i) instanceof JSONObject) {
                         updateJson(jsonArray.getJSONObject(i), concurrentKey, concurrentValue, newValue);
@@ -107,39 +105,36 @@ public class JsonTools {
         return jsonObject;
     }
 
-    public String getJSNONValueByKey(JSONObject jsonObject, String concurrentKey) {
+    public Object getJSNONValueByKey(JSONObject jsonObject, String concurrentKey) {
         Iterator iterator = jsonObject.keys();
-        String value= "";
         String key;
-
+        Object o = "";
         while (iterator.hasNext()) {
             key = (String) iterator.next();
-            if ((jsonObject.optJSONObject(key)
-                    == null) && (jsonObject.optJSONArray(key)
-                    == null)) {
+            if (!(jsonObject.get(key)
+                    instanceof JSONObject) && !(jsonObject.get(key)
+                    instanceof JSONArray)) {
                 if (key.equals(concurrentKey)) {
-                    jsonObject.get(key);
-                    iterator = jsonObject.keys();
+                    o = jsonObject.get(key);
+                    break;
                 }
             }
 
-            if (jsonObject.optJSONObject(key)
-                    != null) {
-                getJSNONValueByKey(jsonObject.getJSONObject(key)
-                        , concurrentKey);
+            if (jsonObject.optJSONObject(key) != null) {
+                o = getJSNONValueByKey(jsonObject.getJSONObject(key), concurrentKey);
+                break;
             }
 
-            if (jsonObject.optJSONArray(key)
-                    != null) {
-                JSONArray jsonArray = jsonObject.getJSONArray(key)
-                        ;
+            if (jsonObject.optJSONArray(key) != null) {
+                JSONArray jsonArray = jsonObject.getJSONArray(key);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.get(i) instanceof JSONObject) {
-                        getJSNONValueByKey(jsonArray.getJSONObject(i), concurrentKey);
+                        o = getJSNONValueByKey(jsonArray.getJSONObject(i), concurrentKey);
+                        break;
                     }
                 }
             }
         }
-        return value;
+        return o;
     }
 }

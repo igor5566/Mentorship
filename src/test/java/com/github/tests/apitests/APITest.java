@@ -1,7 +1,10 @@
 package com.github.tests.apitests;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import github.core.api.pojoFiles.UserInfo;
 import github.core.api.pojoFiles.UserInfo.*;
@@ -13,10 +16,12 @@ import io.restassured.response.Response;
 import jdk.nashorn.internal.parser.JSONParser;
 import lombok.extern.slf4j.Slf4j;
 import org.awaitility.core.Condition;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,7 +75,7 @@ public class APITest {
         Response response = userRequest.userLoginVerifyRequest(token, 200, USER_INFO, cond, key, login);
         UserInfo userInfo = gson.fromJson(response.asString(), UserInfo.class);
 
-//        assertThat(userInfo.login.equals(login)).as("The user login is not as expected.").isTrue();
+        assertThat(userInfo.login.equals(login)).as("The user login is not as expected.").isTrue();
         assertThat(userInfo.plan.name.equals("free")).as("The user plan is not as expected.").isTrue();
     }
 
@@ -83,5 +88,25 @@ public class APITest {
 
         Response response = repoRequests.createRepoVerifyRequest(token, 201, USERS_REPOS, repoInfo);
         response.then().body("name", equalTo("APITest" + uniqueID));
+    }
+
+    @Test(description = "Verify user's login is as expected.")
+    public void userLogin() {
+        userRequest = new UserRequest();
+        String key = "login";
+        String key2 = "space";
+
+        Conditions<Response> cond = ((resp, k) -> {
+            JSONObject jsonObject = new JSONObject(resp.asString());
+            String s = (String) jsonTools.getJSNONValueByKey(jsonObject, k);
+            if (s.equals(login)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        Response response = userRequest.userLoginVerifyRequest(token, 200, USER_INFO, cond,key,login);
+        JSONObject jsonObject = new JSONObject(response.asString());
+        assertThat(jsonTools.getJSNONValueByKey(jsonObject, key2).equals(976562499)).as("The user plan is not as expected.").isTrue();
     }
 }
