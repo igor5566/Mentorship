@@ -96,7 +96,7 @@ public class APITest {
         userRequest = new UserRequest();
         String key = "login1";
         String key2 = "private";
-        String key3 = "name";
+        String key3 = "id1";
         String key4 = "login3";
         String key5 = "wrong key";
 
