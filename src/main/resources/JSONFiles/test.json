@@ -23,5 +23,8 @@
         "node_id": "MDQ6VXNlcjQ3NjMwODU5"
       }
     ]
-  }
+  },
+  "name2": "blog2",
+  "auto_init2": true,
+  "private2": true
 }

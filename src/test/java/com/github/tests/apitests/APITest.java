@@ -98,7 +98,8 @@ public class APITest {
         String key2 = "private";
         String key3 = "id1";
         String key4 = "login3";
-        String key5 = "wrong key";
+        String key5 = "name2";
+        String key6 = "wrong key";
 
         JSONObject jsonObject = jsonTools.getJSONObjectFromFile(pathToTestJSON);
 
@@ -107,5 +108,6 @@ public class APITest {
         log.info("Value " + key3 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key3));
         log.info("Value " + key4 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key4));
         log.info("Value " + key5 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key5));
+        log.info("Value " + key6 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key6));
     }
 }
