@@ -1,9 +1,5 @@
 package github.core.api.pojoFiles;
 
-import org.json.JSONObject;
-
-import java.util.List;
-
 public class UserInfo {
     public String login;
     public int id;

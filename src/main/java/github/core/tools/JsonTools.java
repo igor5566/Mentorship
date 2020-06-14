@@ -9,9 +9,7 @@ import org.json.JSONObject;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class JsonTools {
@@ -106,23 +104,24 @@ public class JsonTools {
     }
 
     public Object getJSNONValueByKey(JSONObject jsonObject, String concurrentKey) {
+
         Iterator iterator = jsonObject.keys();
         String key;
-        Object o = "";
+        Object o = "Cannot find a value";
         while (iterator.hasNext()) {
             key = (String) iterator.next();
             if (!(jsonObject.get(key)
                     instanceof JSONObject) && !(jsonObject.get(key)
                     instanceof JSONArray)) {
                 if (key.equals(concurrentKey)) {
-                    o = jsonObject.get(key);
-                    break;
+                    return jsonObject.get(key);
                 }
             }
 
             if (jsonObject.optJSONObject(key) != null) {
                 o = getJSNONValueByKey(jsonObject.getJSONObject(key), concurrentKey);
-                break;
+                if (!o.equals("Cannot find a value"))
+                return o;
             }
 
             if (jsonObject.optJSONArray(key) != null) {
@@ -130,7 +129,8 @@ public class JsonTools {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     if (jsonArray.get(i) instanceof JSONObject) {
                         o = getJSNONValueByKey(jsonArray.getJSONObject(i), concurrentKey);
-                        break;
+                        if (!o.equals("Cannot find a value"))
+                        return o;
                     }
                 }
             }

@@ -45,6 +45,7 @@ public class APITest {
     private RepoRequests repoRequests;
     private JsonTools jsonTools = new JsonTools();
     private Gson gson = new Gson();
+    private String pathToTestJSON = "src/main/resources/JSONFiles/test.json";
 
     @BeforeClass
     public void settingUp() {
@@ -93,20 +94,18 @@ public class APITest {
     @Test(description = "Verify user's login is as expected.")
     public void userLogin() {
         userRequest = new UserRequest();
-        String key = "login";
-        String key2 = "space";
+        String key = "login1";
+        String key2 = "private";
+        String key3 = "name";
+        String key4 = "login3";
+        String key5 = "wrong key";
 
-        Conditions<Response> cond = ((resp, k) -> {
-            JSONObject jsonObject = new JSONObject(resp.asString());
-            String s = (String) jsonTools.getJSNONValueByKey(jsonObject, k);
-            if (s.equals(login)) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-        Response response = userRequest.userLoginVerifyRequest(token, 200, USER_INFO, cond,key,login);
-        JSONObject jsonObject = new JSONObject(response.asString());
-        assertThat(jsonTools.getJSNONValueByKey(jsonObject, key2).equals(976562499)).as("The user plan is not as expected.").isTrue();
+        JSONObject jsonObject = jsonTools.getJSONObjectFromFile(pathToTestJSON);
+
+        log.info("Value " + key + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key));
+        log.info("Value " + key2 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key2));
+        log.info("Value " + key3 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key3));
+        log.info("Value " + key4 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key4));
+        log.info("Value " + key5 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key5));
     }
 }
