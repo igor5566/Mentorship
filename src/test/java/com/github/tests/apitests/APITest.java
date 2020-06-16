@@ -103,11 +103,11 @@ public class APITest {
 
         JSONObject jsonObject = jsonTools.getJSONObjectFromFile(pathToTestJSON);
 
-        log.info("Value " + key + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key));
-        log.info("Value " + key2 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key2));
-        log.info("Value " + key3 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key3));
-        log.info("Value " + key4 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key4));
-        log.info("Value " + key5 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key5));
-        log.info("Value " + key6 + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key6));
+        log.info("Value " + "'" + key + "'" + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key));
+        log.info("Value " + "'" + key2 + "'" + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key2));
+        log.info("Value " + "'" + key3 + "'" + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key3));
+        log.info("Value " + "'" + key4 + "'" + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key4));
+        log.info("Value " + "'" + key5 + "'" + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key5));
+        log.info("Value " + "'" + key6 + "'" + " is - " + jsonTools.getJSNONValueByKey(jsonObject, key6));
     }
 }
