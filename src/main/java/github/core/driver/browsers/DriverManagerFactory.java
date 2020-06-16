@@ -1,6 +1,7 @@
 package github.core.driver.browsers;
 
 import org.openqa.selenium.WebDriver;
+
 import static github.core.ConfigManager.*;
 
 public class DriverManagerFactory extends DriverManager {
@@ -9,6 +10,9 @@ public class DriverManagerFactory extends DriverManager {
         switch (browser) {
             case "firefox":
                 this.driver = createFirefoxDriver();
+                break;
+            case "selenoid":
+                this.driver = createRemoteDriver();
                 break;
             default:
                 this.driver = createChromeDriver();
